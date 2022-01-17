@@ -8,7 +8,7 @@ import json
 import numpy as np
 from more_itertools import chunked
 
-DATA_DIR='../data/codesearch'
+DATA_DIR='/scratch/xuxiaoj3/codeBERT/data/codesearch/'
 
 def format_str(string):
     for char in ['\r\n', '\r', '\n']:
