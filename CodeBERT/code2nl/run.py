@@ -196,8 +196,10 @@ def main():
     parser.add_argument("--do_lower_case", action='store_true',
                         help="Set this flag if you are using an uncased model.")
     parser.add_argument("--no_cuda", action='store_true',
-                        help="Avoid using CUDA when available") 
-    
+                        help="Avoid using CUDA when available")
+    parser.add_argument("--offline", action='store_true',
+                        help="Do not download the model")
+
     parser.add_argument("--train_batch_size", default=8, type=int,
                         help="Batch size per GPU/CPU for training.")
     parser.add_argument("--eval_batch_size", default=8, type=int,
@@ -251,11 +253,11 @@ def main():
         os.makedirs(args.output_dir)
         
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
-    config = config_class.from_pretrained(args.config_name if args.config_name else args.model_name_or_path)
-    tokenizer = tokenizer_class.from_pretrained(args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,do_lower_case=args.do_lower_case)
+    config = config_class.from_pretrained(args.config_name if args.config_name else args.model_name_or_path,  local_files_only=args.offline)
+    tokenizer = tokenizer_class.from_pretrained(args.tokenizer_name if args.tokenizer_name else args.model_name_or_path,do_lower_case=args.do_lower_case, local_files_only=args.offline)
     
     #budild model
-    encoder = model_class.from_pretrained(args.model_name_or_path,config=config)    
+    encoder = model_class.from_pretrained(args.model_name_or_path,config=config, local_files_only=args.offline)
     decoder_layer = nn.TransformerDecoderLayer(d_model=config.hidden_size, nhead=config.num_attention_heads)
     decoder = nn.TransformerDecoder(decoder_layer, num_layers=6)
     model=Seq2Seq(encoder=encoder,decoder=decoder,config=config,

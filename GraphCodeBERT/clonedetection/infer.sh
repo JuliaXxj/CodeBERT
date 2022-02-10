@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
+#SBATCH --time=1:00:00
+#SBATCH --account=def-six
+#SBATCH --gres=gpu:a100:1
+#SBATCH --mem=40G
+#SBATCH --job-name=GCBcdinfer
 
-
+source ../../pyvenv/venv/bin/activate
 dataset_dir=dataset
 
 python run.py \

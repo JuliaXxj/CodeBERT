@@ -2,8 +2,8 @@
 #SBATCH --time=40:00:00
 #SBATCH --account=def-six
 #SBATCH --gres=gpu:a100:1
-#SBATCH --mem=16G
-#SBATCH --job-name=GCBfinetune
+#SBATCH --mem=40G
+#SBATCH --job-name=GCBcdfinetune
 
 source ../../pyvenv/venv/bin/activate
 
