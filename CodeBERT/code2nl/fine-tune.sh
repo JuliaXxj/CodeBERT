@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-#SBATCH --time=40:00:00
+#SBATCH --time=12:00:00
 #SBATCH --account=def-six
 #SBATCH --gres=gpu:a100:1
 #SBATCH --mem=40G
-#SBATCH --job-name=CBc2nlfinetune
-
-cd code2nl
+#SBATCH --job-name=CBc2nlfinetunephp
 
 
-source ../../pyvenv/venv/bin/activate
+
+
+source ../../../pyvenv/venv/bin/activate
 
 lang=php #programming language
 lr=5e-5
@@ -17,7 +17,7 @@ beam_size=10
 source_length=256
 target_length=128
 data_dir=/scratch/xuxiaoj3/codeBERT/data/code2nl/CodeSearchNet
-output_dir=model/$lang
+output_dir=models/$lang
 train_file=$data_dir/$lang/train.jsonl
 dev_file=$data_dir/$lang/valid.jsonl
 eval_steps=1000 #400 for ruby, 600 for javascript, 1000 for others
