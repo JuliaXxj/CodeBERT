@@ -31,4 +31,5 @@ python run_classifier.py \
     --overwrite_output_dir \
     --data_dir $train_dir \
     --output_dir $output_dir  \
-    --model_name_or_path $pretrained_model
+    --model_name_or_path $pretrained_model \
+    --offline
